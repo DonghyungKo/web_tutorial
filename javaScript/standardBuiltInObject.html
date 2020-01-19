@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+    var arr = new Array('seoul','new york','ladarkh','pusan', 'Tsukuba');
+
+    function getRandomValueFromArray(haystack){
+      var index = Math.floor(haystack.length*Math.random());
+      return haystack[index];
+    }
+
+    document.write(getRandomValueFromArray(arr) + '<br>');
+
+    // Array에 내장된 method로 정의하기
+    Array.prototype.rand = function() {
+      var index = Math.floor(this.length*Math.random());
+      return this[index];
+    }
+
+    var arr = new Array('seoul','new york','ladarkh','pusan', 'Tsukuba');
+
+    document.write(arr.rand());
+
+    </script>
+  </body>
+</html>

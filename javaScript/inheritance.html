@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+
+      // prototype
+      function Person(name){
+        this.name = name;
+      }
+
+      Person.prototype.name = null;
+      Person.prototype.introduce = function () {
+        return 'My name is '+this.name;
+      }
+
+      function Programmer(name){
+        this.name = name;
+      }
+      Programmer.prototype = new Person();
+      Programmer.prototype.sayHi = function () {
+        return 'Hello World!';
+      };
+
+      function Designer(name){
+        this.name = name;
+      }
+      Designer.prototype = new Person()
+      Designer.prototype.sayHi = function(){
+        return 'Beautiful!'
+      }
+
+      var p0 = new Person();
+      var p1 = new Programmer('egoing')
+      var p2 = new Designer('leezche')
+
+      document.write(p0.introduce()+'<br />') // My name is undefined
+      document.write(p1.introduce()+'<br />') // My name is egoing
+      document.write(p1.sayHi()+'<br />') // Hello World!
+      document.write(p2.sayHi()+'<br />') // Beautiful
+    </script>
+  </body>
+</html>

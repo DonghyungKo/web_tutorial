@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>comparisonOperator</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      function write(x){
+        document.write(x)
+        document.write('<br>')
+      }
+
+      // equal oerator (동등 비교 연산자)
+      write(1==2); // false
+
+      write(1==1); // true
+      write('one'=='two'); // false
+      write('one'=='one'); // true
+
+      // stric equal operator (일치 연산자)
+      // === 는 좌항과 우항이 정확하게 같을 때 true를 반환한다.
+      write(1=='1'); // true
+      write(1==='1'); // false
+
+      // undefined vs null
+      var a;
+      write(a); // undefined
+
+      var a = null;
+      write(a); // null
+
+      write(null == undefined); // true
+      write(null === undefined); // false
+
+      write(1 == true); // true
+      write(1 === true); // false
+
+      write('1' == true); // true
+      write('1' === true); // false
+
+      write(0 === -0); // true
+      write(NaN === NaN); //false
+
+      // != : 부정 연산자
+      write(1!=2); // true
+      write(1!=1); // false
+      write('one'!='two'); // true
+      write('one'!='one'); // false
+
+      // !== : 설명은 생략
+
+      // >
+      write(1>10); // false
+      write(10>1); // true
+      write(10>10); // false
+
+      // >=
+      write(1>=10); // false
+      write(10>=1); // true
+      write(10>=10); // true
+
+
+    </script>
+  </body>
+</html>
