@@ -11,19 +11,17 @@ class App extends Component {
     super(props);
 
     this.state = {
-      mode:'welcome',
+      mode:'read',
+
       subject:{title:'WEB', sub:'World Wide Web!'},
       
-      toc: [
+      selectedContentId : 1,
+      contents: [
         {id:1, title:'HTML', desc:'HTML is..'},
         {id:2, title:'CSS', desc:'CSS is..'},
         {id:3, title:'JavaScript', desc:'JavaScript is..'},
-      ],
+      ],       
 
-      content:{
-        title:'HTML',
-        desc:'HTML is HyperText Markup Language.'
-      },
       welcome:{title:'Welcome', desc:'Hello, React!'},
     }
   }
@@ -34,44 +32,37 @@ class App extends Component {
       _title = this.state.welcome.title;
       _desc = this.state.welcome.desc;
     } else if(this.state.mode === 'read'){
-      _title = this.state.content.title;
-      _desc = this.state.content.desc;
-    }
+      for (var i=0; i < this.state.contents.length; i++){
+        var obj = this.state.contents[i]
 
-    function chgModeOnClicked(e){
-      e.preventDefault();
-      if (this.state.mode === 'welcome'){
-        this.setState({mode:'read'});
-      } else if (this.state.mode === 'read'){
-        this.setState({mode:'welcome'});
+        if (obj.id === this.state.selectedContentId){
+          _title = obj.title
+          _desc = obj.desc
+          break
+        }
       }
     }
+
     return (
       <div className="App">
         <Subject 
           title={this.state.subject.title} 
           sub={this.state.subject.sub}
           onChangePage={function(){
-            alert('hihihi')
+            this.setState({mode: 'welcome'});
           }.bind(this)}
           >
         </Subject>
-        {/* <header>
-          <h1>
-            <a href="/" onClick={function(e){
-              e.preventDefault();
-              if (this.state.mode === 'welcome'){
-                this.setState({mode:'read'});
-              } else if (this.state.mode === 'read'){
-                this.setState({mode:'welcome'});
-              }
-            }.bind(this)}>
-              {this.state.subject.title}
-            </a>
-          </h1>
-          {this.state.subject.sub}
-        </header>   */}
-        <TOC data={this.state.toc}></TOC>
+        <TOC
+          onChangePage={function(id){
+            this.setState({
+              mode: 'read',
+              selectedContentId: Number(id),
+            });
+          }.bind(this)}
+          data={this.state.contents}
+          >
+        </TOC>
         <Content title={_title} desc={_desc}></Content>
       </div>
     );
