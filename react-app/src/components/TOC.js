@@ -1,24 +1,38 @@
 import React, { Component } from 'react';
 
 class TOC extends Component {
+  shouldComponentUpdate(newProps, newState){
+    console.log('===> TOC render shouldComponenetUpdate')
+    if (newProps.contents === this.props.contents){
+      return false;
+    }
+    return true;
+  }
+
   render() {
-    var list = [];
-    var data = this.props.data;
-    for (var i = 0; i < this.props.data.length; i++) {
-      
+    console.log('===> TOC render')
+    
+    const list = [];
+    const contents = this.props.contents;
+    
+    for (let i = 0; i < this.props.contents.length; i++) {
+      const _content = contents[i]
+
       list.push(
-        <li key={data[i].id}>
+        <li key={_content.id}>
           <a 
-            href={"/content/"+data[i].id+'.html'}
+            href={"/content/"+_content.id+'.html'}
             onClick={function(id, e){
               e.preventDefault();
               this.props.onChangePage(id);
-            }.bind(this, data[i].id)}
-          >
-            {data[i].title}
+            }.bind(this, _content.id)}
+            >
+            {_content.title}
           </a>
-        </li>)
-    }
+        </li>
+        )
+      }
+    
     return (
       <nav>
         <ul>
